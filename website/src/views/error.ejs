@@ -1,0 +1,8 @@
+<% locals.code = locals.code || 404 %>
+<%- include('components/header', { title: `Erreur ${locals.code}`, index: false }) %>
+<section class="error-section">
+   <h1><%= locals.code %></h1>
+   <h2><%= locals.code === 404 ? "Oups, cette page n'existe pas..." : 'Oups, une erreur est survenue...' %></h2>
+   <a href="/" class="flat-btn">Retour à l'accueil</a>
+</section>
+<%- include('components/footer') %>

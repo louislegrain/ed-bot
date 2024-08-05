@@ -1,0 +1,64 @@
+<%- include('components/header', { title: 'ED Bot - Le bot EcoleDirecte', canonical: '/', css: 'body { padding-bottom: 0; }' }) %>
+<header>
+   <div>
+      <h1>Passe au niveau supérieur !</h1>
+      <h2>ED Bot t'alerte lorsqu'un cours est annulé, lorsqu'une nouvelle note est ajoutée et bien d'autres... Tu peux même connaître ta classe avant la rentrée !</h2>
+      <%- include('components/oauthBtn') %>
+   </div>
+   <div class="discord-msg" aria-hidden="true">
+      <img src="/assets/logos/ed_bot_logo.svg" alt="ED Bot">
+      <div>
+         <div class="info">
+            <span>ED Bot</span>
+            <span class="badge">
+               <svg width="16" height="16" viewBox="0 0 16 15.2">
+                  <path d="M7.4,11.17,4,8.62,5,7.26l2,1.53L10.64,4l1.36,1Z" fill="currentColor"></path>
+               </svg>
+               BOT
+            </span>
+            <span class="time">Aujourd'hui à 19:05</span>
+         </div>
+         <div class="embed">
+            <p class="title">📅 Cours de FRANCAIS annulé demain</p>
+            <p><strong>Professeur :</strong> JOHN DOE</p>
+            <p><strong>Début du cours :</strong> demain à 14:00</p>
+            <p><strong>Fin du cours :</strong> demain à 15:55</p>
+            <p class="footer">Justin CASE - 1ère A</p>
+         </div>
+      </div>
+   </div>
+</header>
+<section class="big-section">
+   <h3>Fonctionnalités</h3>
+   <div class="cards small-grid">
+      <div>
+         <img src="/assets/icons/mail.svg" alt="Boîte aux lettres" aria-hidden="true">
+         <span>Messagerie</span>
+      </div>
+      <div>
+         <img src="/assets/icons/school.svg" alt="Ecole" aria-hidden="true">
+         <span>Vie scolaire</span>
+      </div>
+      <div>
+         <img src="/assets/icons/mark.svg" alt="Notes" aria-hidden="true">
+         <span>Notes</span>
+      </div>
+      <div>
+         <img src="/assets/icons/calendar.svg" alt="Emploi du temps" aria-hidden="true">
+         <span>Emploi du temps</span>
+      </div>
+      <div>
+         <img src="/assets/icons/diary.svg" alt="Cahier de texte" aria-hidden="true">
+         <span>Cahier de texte</span>
+      </div>
+      <div>
+         <img src="/assets/icons/folder.svg" alt="Documents" aria-hidden="true">
+         <span>Documents</span>
+      </div>
+   </div>
+</section>
+<footer>
+   <h3>Configure ton bot en quelques minutes</h3>
+   <%- include('components/oauthBtn') %>
+</footer>
+<%- include('components/footer') %>

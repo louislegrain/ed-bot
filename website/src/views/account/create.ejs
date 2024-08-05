@@ -1,0 +1,13 @@
+<%# loginRequired %>
+<%- include('../components/header', { title: 'Ajouter un compte' }) %>
+<section>
+   <h1>Ajouter un compte EcoleDirecte</h1>
+   <form class="form">
+      <p class="info-msg danger hidden">Une erreur est survenue.</p>
+      <input type="text" name="username" placeholder="Identifiant" <% if (query.username) { %> value="<%= query.username %>" <% } else { %> autofocus <% } %> required>
+      <input type="password" name="password" placeholder="Mot de passe" <% if (query.username) { %> autofocus <% } %> required>
+      <button type="submit" class="flat-btn">Connexion</button>
+   </form>
+</section>
+<script src="/js/create-account.js"></script>
+<%- include('../components/footer') %>

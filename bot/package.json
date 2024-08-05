@@ -1,0 +1,29 @@
+{
+  "name": "ed-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "api-ecoledirecte": "^1.4.3",
+    "dayjs": "^1.11.12",
+    "discord.js": "^13.17.1",
+    "dotenv": "^16.4.5",
+    "mongoose": "^6.13.0",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^2.7.0",
+    "topgg-autoposter": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "prettier": "3.3.3"
+  }
+}

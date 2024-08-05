@@ -1,0 +1,82 @@
+<%
+locals.description = locals.description ? description : "ED Bot t'alerte lorsqu'un cours est annulé, lorsqu'une nouvelle note est ajoutée et bien d'autres... Tu peux même connaître ta classe avant la rentrée !";
+locals.url = process.env.BASE_URL + (locals.canonical ?  locals.canonical : path);
+locals.ogImage = process.env.BASE_URL + '/assets/og_image.png';
+%>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><%- title %></title>
+   <link rel="stylesheet" href="/css/style.css">
+   <% if (locals.css) { %>
+   <style><%- css %></style>
+   <% } %>
+   <!-- Search engines -->
+   <% if (locals.index === false) { %>
+   <meta name="robots" content="noindex">
+   <% } else { %>
+   <link rel="canonical" href="<%- locals.url %>">
+   <% } %>
+   <!-- Meta tags -->
+   <meta name="description" content="<%- locals.description %>">
+   <meta property="og:type" content="website">
+   <meta property="og:url" content="<%- locals.url %>">
+   <meta property="og:title" content="<%- title %>">
+   <meta property="og:description" content="<%- locals.description %>">
+   <meta property="og:image" content="<%- locals.ogImage %>">
+   <meta property="twitter:card" content="summary_large_image">
+   <meta property="twitter:url" content="<%- locals.url %>">
+   <meta property="twitter:title" content="<%- title %>">
+   <meta property="twitter:description" content="<%- locals.description %>">
+   <meta property="twitter:image" content="<%- locals.ogImage %>">
+   <!-- Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+   <!-- Favicons -->
+   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+   <link rel="manifest" href="/assets/favicons/site.webmanifest">
+   <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#0e4d93">
+   <link rel="shortcut icon" href="/favicon.ico">
+   <meta name="theme-color" content="#2C2F33">
+   <!-- Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTKZE9C44E"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-NTKZE9C44E');
+   </script>
+</head>
+<body>
+   <nav>
+      <a href="/" class="home">
+         <img src="/assets/logos/ed_bot_logo.svg" alt="ED Bot">
+         <p>ED BOT</p>
+      </a>
+      <% if (user) { %>
+      <ul class="menu">
+         <li>
+            <span tabindex="0">
+               <%- include('avatar') %>
+               <span><%= user.username %></span>
+            </span>
+            <ul>
+               <li>
+                  <a href="/dashboard">Dashboard</a>
+                  <a href="/discord">Support</a>
+                  <a href="/logout" class="danger">Déconnexion</a>
+               </li>
+            </ul>
+         </li>
+      </ul>
+      <% } else { %>
+      <a href="/login" class="btn small-btn">
+         Connexion
+      </a>
+      <% } %>
+   </nav>

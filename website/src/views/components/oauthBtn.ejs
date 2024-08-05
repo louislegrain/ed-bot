@@ -1,0 +1,5 @@
+<% const added = user && user.webhook && !user.error; %>
+<a href="/authorize" class="btn"<%= added ? ' disabled' : '' %>>
+   <img src="/assets/logos/discord.svg" alt="Discord" aria-hidden="true">
+   <span><%= added ? 'Ajouté' : 'Ajouter à Discord' %></span>
+</a>

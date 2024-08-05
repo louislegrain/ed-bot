@@ -1,0 +1,75 @@
+<%# loginRequired %>
+<%- include('components/header', { title: 'Dashboard', canonical: '/dashboard' }) %>
+<% if (user.webhook && !user.error) { %>
+<section>
+   <h1>Mes comptes</h1>
+   <h2 id="accounts-helper" class="details<%= accounts.data.length < 1 ? '' : ' hidden' %>">Ajoute ton compte EcoleDirecte pour recevoir les alertes.</h2>
+   <p class="error<%= accounts.error ? '' : ' hidden' %>"><%= accounts.error ? accounts.error : 'Une erreur est survenue.' %></p>
+   <div class="cards">
+      <% accounts.data.forEach(account => { %>
+      <form data-id="<%= account.user.id %>">
+         <h4><%= account.user.firstName %> <%= account.user.lastName %></h4>
+         <% if (account.user.class.name || account.user.class.id) { %>
+         <h5><%= account.user.class.name ? account.user.class.name : `Identifiant de classe : ${account.user.class.id}` %></h5>
+         <% } %>
+         <% if (account.lastUpdate) { %>
+         <p class="small">mis à jour <%= relativeTime(Math.ceil((Date.now() - account.lastUpdate) / 1000)) %></p>
+         <% } %>
+         <% if (account.error) { %>
+         <p class="danger small">
+            <% if (account.error === 'disabled account') { %>
+            Impossible d'accéder à ce compte. <a class="link" href="/account/create?<%= new URLSearchParams({ username: account.username }).toString() %>">Clique ici pour mettre à jour tes identifiants.</a>
+            <% } else if (account.error === 'unable to send webhook') { %>
+            Impossible de se connecter au webhook. <a class="link" href="/authorize">Clique ici pour te reconnecter et générer un nouveau webhook.</a>
+            <% } else if (account.error === 'bot no longer on the server') { %>
+            Le bot n'est plus sur le serveur. <a class="link" href="/authorize">Clique ici pour le réinviter.</a>
+            <% } else if (account.error === 'student is no longer linked to this account') { %>
+            Cet élève n'est plus lié à ton compte.
+            <% } else { %>
+            <%= account.error %>
+            <% } %>
+         </p>
+         <% } %>
+         <% if (account.user.modules.length > 0) { %>
+         <ul>
+            <% account.user.modules.forEach(module => { %>
+            <li>
+               <input type="checkbox" name="<%= module %>" id="<%= account.user.id + '-' + module %>"<%= account.notifications.includes(module) ? ' checked' : '' %>>
+               <label for="<%= account.user.id + '-' + module %>"><%= notifications[module] %></label>
+            </li>
+            <% }); %>
+         </ul>
+         <% } else { %>
+         <p>Aucun module disponible pour le moment</p>
+         <% } %>
+         <p class="info-msg danger hidden">Une erreur est survenue.</p>
+         <div class="buttons">
+            <button type="button" class="danger-btn">Supprimer ce compte</button>
+         </div>
+      </form>
+      <% }); %>
+      <a href="/account/create" class="action">
+         <img src="/assets/icons/add.svg" alt="Plus" aria-hidden="true">
+         <span>Ajouter un compte</span>
+      </a>
+   </div>
+</section>
+<% } %>
+<section>
+   <h1>Configuration<%= user.webhook ? '' : ' (étape 2/3)' %></h1>
+   <% if (!user.error) { %>
+   <h2 class="details<%= user.webhook ? ' hidden' : '' %>">Tu dois inviter ED Bot sur <a href="https://support.discord.com/hc/fr/articles/204849977" target="_blank" rel="noopener" class="link">ton serveur</a> pour pouvoir recevoir les alertes.</h2>
+   <% } else if (user.error === 'unable to send webhook') { %>
+   <h2 class="details danger">Impossible de se connecter au webhook. Clique sur ce bouton pour en générer un nouveau.</h2>
+   <% } else if (user.error === 'bot no longer on the server') { %>
+   <h2 class="details danger">Le bot n'est plus sur le serveur. Clique sur ce bouton pour le réinviter.</h2>
+   <% } else { %>
+   <h2 class="details danger"><%= user.error %></h2>
+   <% } %>
+   <a href="/authorize" class="btn">
+      <img src="/assets/logos/discord.svg" alt="Discord" aria-hidden="true">
+      <span><%= user.webhook ? 'Inviter sur un autre serveur' : 'Inviter sur le serveur' %></span>
+   </a>
+</section>
+<script src="/js/dashboard.js"></script>
+<%- include('components/footer') %>

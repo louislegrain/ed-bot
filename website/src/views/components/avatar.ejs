@@ -1,0 +1,5 @@
+<% if (user.avatar) { %> 
+<img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png?size=40" alt="Photo de profil Discord" aria-hidden="true" class="profile-picture">
+<% } else { %>
+<img src="/assets/icons/default_profile_picture.png" alt="Photo de profil Discord" aria-hidden="true" class="profile-picture">
+<% } %>
