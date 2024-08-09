@@ -3,6 +3,7 @@ module.exports = app => {
    app.get('/authorize', require('./authorize'));
    app.get('/logout', require('./logout'));
    app.get('/discord', require('./discord'));
+   app.get('/github', require('./github'));
    app.get('/oauth2', require('./oauth2'));
    app.use('/api', require('./api'));
    app.use(
