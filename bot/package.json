@@ -13,7 +13,7 @@
   "author": "",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "api-ecoledirecte": "^1.4.4",
+    "api-ecoledirecte": "^1.4.5",
     "dayjs": "^1.11.12",
     "discord.js": "^13.17.1",
     "dotenv": "^16.4.5",
